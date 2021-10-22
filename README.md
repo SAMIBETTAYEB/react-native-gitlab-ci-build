@@ -6,7 +6,7 @@ Based on https://hub.docker.com/r/magiczvn/gitlab-ci-react-native-android/
 sample .gitlab-ci.yml:
 
 ```
-image: jpkrause/react-native-gitlab-ci-build
+image: samibettayeb/react-native-gitlab-ci-build
 
 cache:
   paths:
