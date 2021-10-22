@@ -64,8 +64,8 @@ ENV LD_LIBRARY_PATH ${ANDROID_CMDLINE_ROOT}/emulator/lib64:${ANDROID_CMDLINE_ROO
 ENV QTWEBENGINE_DISABLE_SANDBOX 1
 
 # accept the license agreements of the CMDLINE components
-ADD license_accepter.sh /opt/
-RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_CMDLINE_ROOT
+ADD license-acceptor.sh /opt/
+RUN chmod +x /opt/license-acceptor.sh && /opt/license-acceptor.sh $ANDROID_CMDLINE_ROOT
 
 # ——————————
 # Installs Gradle
