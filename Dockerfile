@@ -24,7 +24,7 @@ RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:linuxuprising/java && \
   apt-get update && \
-  apt-get -y install oracle-java17-installer && \
+  apt-get install -y oracle-java17-installer && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-java17-installer
 
