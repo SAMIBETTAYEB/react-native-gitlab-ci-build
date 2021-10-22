@@ -1,5 +1,5 @@
 # Pull base image.
-FROM ubuntu:14.04
+FROM ubuntu:21.10
 
 # Install base software packages
 RUN apt-get update && \
