@@ -21,15 +21,9 @@ RUN apt-get update && \
 # ——————————
 # Install Java.
 # ——————————
-
-RUN \
-  echo oracle-java17-installer shared/accepted-oracle-license-v1-3 select true | /usr/bin/debconf-set-selections && \
-  add-apt-repository -y ppa:linuxuprising/java && \
-  apt-get update && \
-  apt-get install -y oracle-java17-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-java17-installer
-
+ARG JDK_VERSION=8
+RUN apt-get install -y --no-install-recommends openjdk-${JDK_VERSION}-jdk
+ENV JAVA_HOME /usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
 
 # ——————————
 # Installs i386 architecture required for running 32 bit Android tools
