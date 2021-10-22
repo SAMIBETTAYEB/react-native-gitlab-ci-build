@@ -41,12 +41,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get clean
 
 # ——————————
-# Install bsdtar
-# ——————————
-
-RUN apt-get install -y libarchive-dev
-
-# ——————————
 # Installs Android CMDLINE
 # ——————————
 
