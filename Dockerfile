@@ -45,7 +45,7 @@ RUN dpkg --add-architecture i386 && \
 # Installs Android SDK
 # ——————————
 
-ENV ANDROID_SDK_VERSION 3859397
+ENV ANDROID_SDK_VERSION 4333796
 ENV ANDROID_SDK_FILENAME sdk-tools-linux-${ANDROID_SDK_VERSION}.zip
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME}
 ENV ANDROID_HOME /opt/android-sdk-linux
