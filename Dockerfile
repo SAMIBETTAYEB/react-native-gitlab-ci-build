@@ -1,8 +1,6 @@
 # Pull base image.
 FROM ubuntu:21.10
 
-ARG DEBIAN_FRONTEND=noninteractive
-
 # Install base software packages
 RUN apt-get update && \
     apt-get install software-properties-common \
