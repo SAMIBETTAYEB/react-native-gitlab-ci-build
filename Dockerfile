@@ -47,18 +47,31 @@ RUN dpkg --add-architecture i386 && \
 RUN apt-get install -y libarchive-dev
 
 # ——————————
-# Installs Android SDK
+# Installs Android CMDLINE
 # ——————————
 
-ENV ANDROID_HOME /opt/android/cmdline-tools/latest
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools/bin
-RUN mkdir -p /opt/android/cmdline-tools/latest \
-    && cd /opt/android/cmdline-tools/latest \
-    && wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip \
-    && bsdtar --strip-components=1 -xvf commandlinetools-linux-6858069_latest.zip \
-    && yes | bin/sdkmanager --licenses \
-    && bin/sdkmanager "build-tools;29.0.2" "platforms;android-29" \
-    && rm commandlinetools-linux-6858069_latest.zip
+ARG ANDROID_CMDLINE_VERSION=7302050
+ENV ANDROID_CMDLINE_ROOT /opt/android-cmdline
+RUN mkdir -p ${ANDROID_CMDLINE_ROOT}/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_CMDLINE_VERSION}_latest.zip && \
+    unzip *tools*linux*.zip -d ${ANDROID_CMDLINE_ROOT}/cmdline-tools && \
+    mv ${ANDROID_CMDLINE_ROOT}/cmdline-tools/cmdline-tools ${ANDROID_CMDLINE_ROOT}/cmdline-tools/tools && \
+    rm *tools*linux*.zip
+
+# set the environment variables
+ENV JAVA_HOME /usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
+ENV GRADLE_HOME /opt/gradle
+ENV KOTLIN_HOME /opt/kotlinc
+ENV PATH ${PATH}:${GRADLE_HOME}/bin:${KOTLIN_HOME}/bin:${ANDROID_CMDLINE_ROOT}/cmdline-tools/latest/bin:${ANDROID_CMDLINE_ROOT}/cmdline-tools/tools/bin:${ANDROID_CMDLINE_ROOT}/platform-tools:${ANDROID_CMDLINE_ROOT}/emulator
+# WORKAROUND: for issue https://issuetracker.google.com/issues/37137213
+ENV LD_LIBRARY_PATH ${ANDROID_CMDLINE_ROOT}/emulator/lib64:${ANDROID_CMDLINE_ROOT}/emulator/lib64/qt/lib
+# patch emulator issue: Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+# https://doc.qt.io/qt-5/qtwebengine-platform-notes.html#sandboxing-support
+ENV QTWEBENGINE_DISABLE_SANDBOX 1
+
+# accept the license agreements of the CMDLINE components
+ADD license_accepter.sh /opt/
+RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_CMDLINE_ROOT
 
 # ——————————
 # Installs Gradle
