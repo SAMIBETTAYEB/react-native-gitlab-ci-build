@@ -5,6 +5,8 @@ FROM ubuntu:21.10
 ENV TZ=Africa/Algiers
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 # Install base software packages
 RUN apt-get update && \
     apt-get install software-properties-common \
