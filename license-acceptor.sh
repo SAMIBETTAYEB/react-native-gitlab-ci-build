@@ -1,9 +1,9 @@
 #!/bin/bash
 
-check_android_cmdline_root() {
+check_android_sdk_root() {
   if [ "$#" -lt 1 ]; then
-    if [ -z "${ANDROID_CMDLINE_ROOT}" ]; then
-      echo "Please either set ANDROID_CMDLINE_ROOT environment variable, or pass ANDROID_CMDLINE_ROOT directory as a parameter"
+    if [ -z "${ANDROID_SDK_ROOT}" ]; then
+      echo "Please either set ANDROID_SDK_ROOT environment variable, or pass ANDROID_SDK_ROOT directory as a parameter"
       exit 1
     else
       ANDROID_CMDLINE_ROOT="${ANDROID_CMDLINE_ROOT}"
@@ -11,7 +11,7 @@ check_android_cmdline_root() {
   else
     ANDROID_CMDLINE_ROOT=$1
   fi
-  echo "ANDROID_CMDLINE_ROOT is at $ANDROID_CMDLINE_ROOT"
+  echo "ANDROID_SDK_ROOT is at $ANDROID_CMDLINE_ROOT"
 }
 
 accept_all_android_licenses() {
@@ -48,5 +48,5 @@ accept_license_of() {
   fi
 }
 
-check_android_cmdline_root "$@"
+check_android_sdk_root "$@"
 accept_all_android_licenses

@@ -41,7 +41,7 @@ RUN dpkg --add-architecture i386 && \
 # ——————————
 
 ARG ANDROID_CMDLINE_VERSION=7302050
-ENV ANDROID_CMDLINE_ROOT /opt/android-cmdline
+ENV ANDROID_SDK_ROOT /opt/android-cmdline
 RUN mkdir -p ${ANDROID_CMDLINE_ROOT}/cmdline-tools && \
     wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_CMDLINE_VERSION}_latest.zip && \
     unzip *tools*linux*.zip -d ${ANDROID_CMDLINE_ROOT}/cmdline-tools && \
