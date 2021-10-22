@@ -40,6 +40,11 @@ RUN dpkg --add-architecture i386 && \
     apt-get autoremove -y && \
     apt-get clean
 
+# ——————————
+# Install bsdtar
+# ——————————
+
+RUN apt-get install -y libarchive-dev
 
 # ——————————
 # Installs Android SDK
