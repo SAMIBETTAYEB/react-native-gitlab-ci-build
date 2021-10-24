@@ -5,6 +5,9 @@ FROM ubuntu:21.10
 ENV TZ=Africa/Algiers
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+ENV LANG en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
+
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Install base software packages
@@ -97,5 +100,3 @@ ENV PATH ${PATH}:/opt/node/bin
 # ——————————
 RUN npm install react-native-cli -g
 RUN npm install yarn -g
-
-ENV LANG en_US.UTF-8
